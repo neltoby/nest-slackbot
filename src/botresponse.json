@@ -1,0 +1,13 @@
+{
+  "first": {
+    "question": "Welcome. How are you doing?",
+    "responses": ["Doing Well", "Neutral", "Feeling Lucky"]
+  },
+  "second": {
+    "question": "What are your favorite hobbies",
+    "responses": ["Football", "Music", "Sleep", "Movies", "Basketball"]
+  },
+  "third": {
+    "response": "Thank You!"
+  }
+}

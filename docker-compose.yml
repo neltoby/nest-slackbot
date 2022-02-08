@@ -1,0 +1,44 @@
+version: "3.7"
+
+services:
+  api:
+    image: api
+    container_name: api
+    restart: always
+    env_file: ../slackbot-api/.env
+    environment:
+      - CONNECTION_URL=$CONNECTION_URL
+    ports:
+      - 4000:4000
+    depends_on:
+      - mongo
+    volumes:
+      - .:/api
+      - node_modules:/api/node_modules
+    command: sh -c "yarn run start:dev"
+  bot:
+    image: slackbot
+    container_name: bot
+    restart: always
+    env_file: .env
+    environment:
+      - CONNECTION_URL=$CONNECTION_URL
+    ports:
+      - 5500:5500
+    depends_on:
+      - mongo
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    command: sh -c "yarn run start:dev"
+  mongo:
+    image: mongo
+    container_name: mongodb_container
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodata:/data/db
+volumes:
+  mongodata: null
+  node_modules: null
